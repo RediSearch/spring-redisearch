@@ -1,4 +1,4 @@
-package com.redislabs.rediscogs;
+package com.redislabs.springredisearch;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
