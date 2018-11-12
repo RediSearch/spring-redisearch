@@ -16,9 +16,9 @@
 	<version>1.0.0-SNAPSHOT</version>
 
 	<scm>
-		<url>https://github.com/RedisLabs/spring-redisearch</url>
-		<connection>scm:git:git://github.com/RedisLabs/spring-redisearch.git</connection>
-		<developerConnection>scm:git:git@github.com:RedisLabs/spring-redisearch.git</developerConnection>
+		<url>https://github.com/Redislabs-Solution-Architects/spring-redisearch.git</url>
+		<connection>scm:git:git://github.com/Redislabs-Solution-Architects/spring-redisearch.git</connection>
+		<developerConnection>scm:git:git@github.com:Redislabs-Solution-Architects/spring-redisearch.git</developerConnection>
 	</scm>
 
 	<repositories>
