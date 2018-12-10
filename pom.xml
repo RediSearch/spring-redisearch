@@ -11,13 +11,13 @@
 
 	<groupId>com.redislabs</groupId>
 	<artifactId>spring-redisearch</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 
 	<scm>
 		<url>https://github.com/Redislabs-Solution-Architects/spring-redisearch.git</url>
 		<connection>scm:git:git://github.com/Redislabs-Solution-Architects/spring-redisearch.git</connection>
 		<developerConnection>scm:git:git@github.com:Redislabs-Solution-Architects/spring-redisearch.git</developerConnection>
-	  <tag>HEAD</tag>
+	  <tag>spring-redisearch-1.0.1</tag>
   </scm>
 
 	<repositories>
