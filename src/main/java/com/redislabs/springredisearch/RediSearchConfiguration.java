@@ -1,22 +1,17 @@
 package com.redislabs.springredisearch;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Component;
 
+import io.redisearch.Document;
+import io.redisearch.client.AddOptions;
 import io.redisearch.client.Client;
 import lombok.Data;
 
 @Configuration
-@Component
 @ConfigurationProperties(prefix = "redisearch")
-@EnableAutoConfiguration
 @Data
 public class RediSearchConfiguration {
 
@@ -34,13 +29,6 @@ public class RediSearchConfiguration {
 
 	public String getSuggestIndexName(String id) {
 		return id + "SuggestIdx";
-	}
-
-	@Bean
-	public StringRedisTemplate redisTemplate(LettuceConnectionFactory connectionFactory) {
-		StringRedisTemplate template = new StringRedisTemplate();
-		template.setConnectionFactory(connectionFactory);
-		return template;
 	}
 
 	public Client getClient(String index) {
@@ -81,5 +69,9 @@ public class RediSearchConfiguration {
 
 	public Client getSuggestClient(String id) {
 		return getClient(getSuggestIndexName(id));
+	}
+
+	public void addDocuments(Client client, AddOptions options, Document... docs) {
+		client.addDocuments(options, docs);
 	}
 }
