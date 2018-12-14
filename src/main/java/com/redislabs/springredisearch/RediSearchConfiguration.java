@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import io.redisearch.Document;
-import io.redisearch.client.AddOptions;
 import io.redisearch.client.Client;
 import lombok.Data;
 
@@ -71,7 +69,4 @@ public class RediSearchConfiguration {
 		return getClient(getSuggestIndexName(id));
 	}
 
-	public void addDocuments(Client client, AddOptions options, Document... docs) {
-		client.addDocuments(options, docs);
-	}
 }
