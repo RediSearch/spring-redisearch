@@ -6,7 +6,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import io.redisearch.client.Client;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Configuration
 @ConfigurationProperties(prefix = "redisearch")
@@ -17,20 +20,22 @@ public class RediSearchConfiguration {
 	private static final int DEFAULT_POOLSIZE = 1;
 
 	@Autowired
+	@Getter(AccessLevel.NONE)
+	@Setter(AccessLevel.NONE)
 	private RedisProperties redisProps;
 	private String host;
 	private Integer port;
-
-	public String getIndexName(String id) {
-		return id + "Idx";
-	}
-
-	public String getSuggestIndexName(String id) {
-		return id + "SuggestIdx";
-	}
+	private String password;
 
 	public Client getClient(String index) {
-		return new Client(index, getHost(), getPort(), getTimeout(), getPoolSize());
+		return new Client(index, getHost(), getPort(), getTimeout(), getPoolSize(), getPassword());
+	}
+
+	private String getPassword() {
+		if (password == null) {
+			return redisProps.getPassword();
+		}
+		return password;
 	}
 
 	private int getPort() {
@@ -59,14 +64,6 @@ public class RediSearchConfiguration {
 			return DEFAULT_TIMEOUT;
 		}
 		return (int) redisProps.getTimeout().toMillis();
-	}
-
-	public Client getSearchClient(String id) {
-		return getClient(getIndexName(id));
-	}
-
-	public Client getSuggestClient(String id) {
-		return getClient(getSuggestIndexName(id));
 	}
 
 }
