@@ -45,8 +45,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.redislabs</groupId>
-			<artifactId>jredisearch</artifactId>
-			<version>0.21.0</version>
+			<artifactId>lettusearch</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
