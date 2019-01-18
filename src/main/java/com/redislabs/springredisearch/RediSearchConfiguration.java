@@ -3,6 +3,7 @@ package com.redislabs.springredisearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.redislabs.lettusearch.RediSearchClient;
@@ -26,6 +27,7 @@ public class RediSearchConfiguration {
 	private Integer port;
 	private String password;
 
+	@Bean
 	public RediSearchClient getClient() {
 		RedisURI redisURI = RedisURI.create(host == null ? props.getHost() : host,
 				port == null ? props.getPort() : port);
