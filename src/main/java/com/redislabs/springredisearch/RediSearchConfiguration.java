@@ -24,7 +24,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Configuration
-@ConfigurationProperties(prefix = "redisearch")
+@ConfigurationProperties(prefix = "spring.redisearch")
 @Data
 public class RediSearchConfiguration {
 
