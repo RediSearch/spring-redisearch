@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import com.redislabs.lettusearch.RediSearchClient;
 import com.redislabs.lettusearch.StatefulRediSearchConnection;
 
-import io.lettuce.core.ClientOptions;
 import io.lettuce.core.RedisURI;
 import io.lettuce.core.resource.ClientResources;
 import io.lettuce.core.resource.DefaultClientResources;
@@ -37,7 +36,6 @@ public class RediSearchConfiguration {
 	private Integer port;
 	private String password;
 	private Duration timeout;
-	private boolean publishOnScheduler;
 	private int poolSize = 1;
 
 	@Bean(destroyMethod = "shutdown")
@@ -56,9 +54,7 @@ public class RediSearchConfiguration {
 		if (timeout != null) {
 			redisURI.setTimeout(timeout);
 		}
-		RediSearchClient client = RediSearchClient.create(clientResources, redisURI);
-		client.setOptions(ClientOptions.builder().publishOnScheduler(publishOnScheduler).build());
-		return client;
+		return RediSearchClient.create(clientResources, redisURI);
 	}
 
 	@Bean(destroyMethod = "close")
