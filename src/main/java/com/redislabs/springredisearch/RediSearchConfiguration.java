@@ -36,7 +36,7 @@ public class RediSearchConfiguration {
 	private Integer port;
 	private String password;
 	private Duration timeout;
-	private int poolSize = 1;
+	private Pool pool;
 
 	@Bean(destroyMethod = "shutdown")
 	ClientResources clientResources() {
@@ -68,14 +68,21 @@ public class RediSearchConfiguration {
 		GenericObjectPool<StatefulRediSearchConnection<String, String>> pool = ConnectionPoolSupport
 				.createGenericObjectPool(() -> rediSearchClient.connect(),
 						new GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>>());
-		if (props.getLettuce().getPool() != null) {
-			Pool properties = props.getLettuce().getPool();
-			pool.setMaxTotal(properties.getMaxActive());
-			pool.setMaxIdle(properties.getMaxIdle());
-			pool.setMinIdle(properties.getMinIdle());
-			if (properties.getMaxWait() != null) {
-				pool.setMaxWaitMillis(properties.getMaxWait().toMillis());
+		Pool poolProps = pool();
+		if (poolProps != null) {
+			pool.setMaxTotal(poolProps.getMaxActive());
+			pool.setMaxIdle(poolProps.getMaxIdle());
+			pool.setMinIdle(poolProps.getMinIdle());
+			if (poolProps.getMaxWait() != null) {
+				pool.setMaxWaitMillis(poolProps.getMaxWait().toMillis());
 			}
+		}
+		return pool;
+	}
+
+	private Pool pool() {
+		if (pool == null) {
+			return props.getLettuce().getPool();
 		}
 		return pool;
 	}
