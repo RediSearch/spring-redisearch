@@ -1,0 +1,27 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+      - image: redislabs/redisearch:latest
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: spring-redisearch-{{ checksum "pom.xml" }}
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: spring-redisearch-{{ checksum "pom.xml" }}
+          
+      - run: mvn integration-test 
+
+      - run: mvn cobertura:cobertura
+          
+      - run: bash <(curl -s https://codecov.io/bash) -t ${CODECOV_TOKEN}  
+                
+      - run: mvn -s .circleci.settings.xml -DskipTests deploy
