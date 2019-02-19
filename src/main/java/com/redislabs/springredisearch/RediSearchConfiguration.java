@@ -65,9 +65,10 @@ public class RediSearchConfiguration {
 	@Bean(name = "rediSearchConnectionPool", destroyMethod = "close")
 	GenericObjectPool<StatefulRediSearchConnection<String, String>> rediSearchConnectionPool(
 			RediSearchClient rediSearchClient) {
+		GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>> config = new GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>>();
+		config.setJmxEnabled(false);
 		GenericObjectPool<StatefulRediSearchConnection<String, String>> pool = ConnectionPoolSupport
-				.createGenericObjectPool(() -> rediSearchClient.connect(),
-						new GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>>());
+				.createGenericObjectPool(() -> rediSearchClient.connect(), config);
 		Pool poolProps = pool();
 		if (poolProps != null) {
 			pool.setMaxTotal(poolProps.getMaxActive());
