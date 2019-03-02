@@ -86,6 +86,7 @@
 					<serverId>ossrh</serverId>
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
 				</configuration>
 			</plugin>
 			<plugin>
