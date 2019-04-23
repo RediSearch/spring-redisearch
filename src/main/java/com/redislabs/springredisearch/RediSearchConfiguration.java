@@ -37,7 +37,7 @@ public class RediSearchConfiguration {
 	private String password;
 	private Duration timeout;
 	private Pool pool;
-
+	
 	@Bean(destroyMethod = "shutdown")
 	ClientResources clientResources() {
 		return DefaultClientResources.create();
