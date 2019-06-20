@@ -57,7 +57,7 @@ public class RediSearchConfiguration {
 		return RediSearchClient.create(clientResources, redisURI);
 	}
 
-	@Bean(destroyMethod = "close")
+	@Bean(name = "rediSearchConnection", destroyMethod = "close")
 	StatefulRediSearchConnection<String, String> connection(RediSearchClient rediSearchClient) {
 		return rediSearchClient.connect();
 	}
