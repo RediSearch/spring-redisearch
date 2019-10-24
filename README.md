@@ -6,6 +6,9 @@
 
 
 # Spring RediSearch
+[![Mailing List](https://img.shields.io/badge/Mailing%20List-RediSearch-blue)](https://groups.google.com/forum/#!forum/redisearch)
+[![Gitter](https://badges.gitter.im/RedisLabs/RediSearch.svg)](https://gitter.im/RedisLabs/RediSearch?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 Spring RediSearch provides access to RediSearch from Spring applications
 
 ## Usage
