@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties.Pool;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,10 +24,10 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConfigurationProperties(prefix = "spring.redisearch")
-@Data
-public class RediSearchConfiguration {
+@EnableConfigurationProperties(RedisProperties.class)
+public @Data class RediSearchAutoConfiguration {
 
 	@Autowired
 	@Getter(AccessLevel.NONE)
