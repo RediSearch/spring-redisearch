@@ -11,7 +11,7 @@
 
 	<groupId>com.redislabs</groupId>
 	<artifactId>spring-redisearch</artifactId>
-	<version>1.9.0</version>
+	<version>1.9.1-SNAPSHOT</version>
 
 	<name>Spring RediSearch</name>
 	<description>Spring-enabled client for RediSearch based on LettuSearch</description>
@@ -20,7 +20,7 @@
 		<url>https://github.com/Redisearch/spring-redisearch.git</url>
 		<connection>scm:git:git://github.com/Redisearch/spring-redisearch.git</connection>
 		<developerConnection>scm:git:git@github.com:Redisearch/spring-redisearch.git</developerConnection>
-		<tag>spring-redisearch-1.9.0</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<repositories>
