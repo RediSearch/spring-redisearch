@@ -1,3 +1,4 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.redislabs.springredisearch.RediSearchAutoConfiguration
+com.redislabs.springredisearch.RediSearchAutoConfiguration,\
+org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
