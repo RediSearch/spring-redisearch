@@ -5,8 +5,6 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.27.0'
     id 'net.researchgate.release' version '2.8.1'
     id 'com.github.breadmoirai.github-release' version '2.2.10'
-    id 'org.springframework.boot' version '2.2.4.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 }
 
 repositories {
@@ -15,11 +13,11 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-autoconfigure'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure:2.2.4.RELEASE'
 	api 'com.redislabs:lettusearch:1.12.2'
-	api 'org.apache.commons:commons-pool2'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+	api 'org.apache.commons:commons-pool2:2.8.0'
+	compileOnly 'org.projectlombok:lombok:1.18.10'
+	annotationProcessor 'org.projectlombok:lombok:1.18.10'
 }
 
 test {
