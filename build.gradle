@@ -31,7 +31,7 @@ bintray {
     publish = true
     pkg {
         repo = 'maven'
-        name = 'spring-redisearch'
+        name = 'com.redislabs:spring-redisearch'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/RediSearch/spring-redisearch.git'
 	    version {
