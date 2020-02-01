@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-autoconfigure:2.2.4.RELEASE'
-	api 'com.redislabs:lettusearch:1.12.2'
+	api 'com.redislabs:lettusearch:1.12.6'
 	api 'org.apache.commons:commons-pool2:2.8.0'
 	compileOnly 'org.projectlombok:lombok:1.18.10'
 	annotationProcessor 'org.projectlombok:lombok:1.18.10'
