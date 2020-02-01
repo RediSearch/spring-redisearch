@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure'
 	api 'com.redislabs:lettusearch:1.12.2'
 	api 'org.apache.commons:commons-pool2'
     compileOnly 'org.projectlombok:lombok'
