@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties.Pool;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -22,18 +23,21 @@ import io.lettuce.core.support.ConnectionPoolSupport;
 @EnableConfigurationProperties(RedisProperties.class)
 public class RediSearchAutoConfiguration {
 
+	@Autowired
+	private RedisProperties redisProperties;
+
 	@Bean(destroyMethod = "shutdown")
 	ClientResources clientResources() {
 		return DefaultClientResources.create();
 	}
 
 	@Bean(destroyMethod = "shutdown")
-	RediSearchClient client(RedisProperties props, ClientResources clientResources) {
-		RedisURI redisURI = RedisURI.create(props.getHost(), props.getPort());
-		if (props.getPassword() != null) {
-			redisURI.setPassword(props.getPassword());
+	RediSearchClient client(ClientResources clientResources) {
+		RedisURI redisURI = RedisURI.create(redisProperties.getHost(), redisProperties.getPort());
+		if (redisProperties.getPassword() != null) {
+			redisURI.setPassword(redisProperties.getPassword());
 		}
-		Duration timeout = props.getTimeout();
+		Duration timeout = redisProperties.getTimeout();
 		if (timeout != null) {
 			redisURI.setTimeout(timeout);
 		}
@@ -45,23 +49,30 @@ public class RediSearchAutoConfiguration {
 		return rediSearchClient.connect();
 	}
 
-	@Bean(name = "rediSearchConnectionPool", destroyMethod = "close")
-	GenericObjectPool<StatefulRediSearchConnection<String, String>> pool(RedisProperties props,
-			RediSearchClient rediSearchClient) {
-		GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>> config = new GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>>();
+	@Bean(name = "rediSearchConnectionPoolConfig")
+	GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>> poolConfig() {
+		return configure(new GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>>());
+	}
+
+	public <K, V> GenericObjectPoolConfig<StatefulRediSearchConnection<K, V>> configure(
+			GenericObjectPoolConfig<StatefulRediSearchConnection<K, V>> config) {
 		config.setJmxEnabled(false);
-		GenericObjectPool<StatefulRediSearchConnection<String, String>> pool = ConnectionPoolSupport
-				.createGenericObjectPool(() -> rediSearchClient.connect(), config);
-		Pool poolProps = props.getLettuce().getPool();
+		Pool poolProps = redisProperties.getLettuce().getPool();
 		if (poolProps != null) {
-			pool.setMaxTotal(poolProps.getMaxActive());
-			pool.setMaxIdle(poolProps.getMaxIdle());
-			pool.setMinIdle(poolProps.getMinIdle());
+			config.setMaxTotal(poolProps.getMaxActive());
+			config.setMaxIdle(poolProps.getMaxIdle());
+			config.setMinIdle(poolProps.getMinIdle());
 			if (poolProps.getMaxWait() != null) {
-				pool.setMaxWaitMillis(poolProps.getMaxWait().toMillis());
+				config.setMaxWaitMillis(poolProps.getMaxWait().toMillis());
 			}
 		}
-		return pool;
+		return config;
+	}
+
+	@Bean(name = "rediSearchConnectionPool", destroyMethod = "close")
+	GenericObjectPool<StatefulRediSearchConnection<String, String>> pool(
+			GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>> config, RediSearchClient client) {
+		return ConnectionPoolSupport.createGenericObjectPool(client::connect, config);
 	}
 
 }
