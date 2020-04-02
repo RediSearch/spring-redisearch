@@ -32,7 +32,7 @@ jar {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
-	api 'com.redislabs:lettusearch:2.0.0'
+	api 'com.redislabs:lettusearch:2.0.1'
 	api 'org.apache.commons:commons-pool2'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
