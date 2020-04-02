@@ -1,30 +1,30 @@
 package com.redislabs.springredisearch;
 
-import java.time.Duration;
-
+import com.redislabs.lettusearch.RediSearchClient;
+import com.redislabs.lettusearch.StatefulRediSearchConnection;
+import io.lettuce.core.RedisURI;
+import io.lettuce.core.resource.ClientResources;
+import io.lettuce.core.resource.DefaultClientResources;
+import io.lettuce.core.support.ConnectionPoolSupport;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties.Pool;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.redislabs.lettusearch.RediSearchClient;
-import com.redislabs.lettusearch.StatefulRediSearchConnection;
-
-import io.lettuce.core.RedisURI;
-import io.lettuce.core.resource.ClientResources;
-import io.lettuce.core.resource.DefaultClientResources;
-import io.lettuce.core.support.ConnectionPoolSupport;
+import java.time.Duration;
 
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(RedisProperties.class)
 public class RediSearchAutoConfiguration {
 
-	@Autowired
-	private RedisProperties redisProperties;
+	private final RedisProperties redisProperties;
+
+	public RediSearchAutoConfiguration(RedisProperties redisProperties) {
+		this.redisProperties = redisProperties;
+	}
 
 	@Bean(destroyMethod = "shutdown")
 	ClientResources clientResources() {
@@ -51,7 +51,7 @@ public class RediSearchAutoConfiguration {
 
 	@Bean(name = "rediSearchConnectionPoolConfig")
 	GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>> poolConfig() {
-		return configure(new GenericObjectPoolConfig<StatefulRediSearchConnection<String, String>>());
+		return configure(new GenericObjectPoolConfig<>());
 	}
 
 	public <K, V> GenericObjectPoolConfig<StatefulRediSearchConnection<K, V>> configure(

@@ -10,6 +10,11 @@ plugins {
 	id 'org.springframework.boot' version '2.2.6.RELEASE'
 }
 
+group = 'com.redislabs'
+description = 'Spring RediSearch'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
 repositories {
 	jcenter()
 	mavenCentral()
@@ -27,7 +32,7 @@ jar {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
-	api 'com.redislabs:lettusearch:1.13.2'
+	api 'com.redislabs:lettusearch:2.0.0'
 	api 'org.apache.commons:commons-pool2'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -112,11 +117,6 @@ publishing {
         }
     }
 }
-
-group = 'com.redislabs'
-description = 'Spring RediSearch'
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
 
 task printVersion {
     doLast {
