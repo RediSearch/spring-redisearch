@@ -1,7 +1,7 @@
 plugins {
     id 'com.github.ben-manes.versions' version '0.28.0'
     id 'com.github.breadmoirai.github-release' version '2.2.12'
-    id 'com.jfrog.bintray' version '1.8.4'
+    id 'com.jfrog.bintray' version '1.8.5'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
     id 'java-library'
@@ -32,7 +32,7 @@ jar {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
-	api 'com.redislabs:lettusearch:2.0.1'
+	api 'com.redislabs:lettusearch:2.1.0'
 	api 'org.apache.commons:commons-pool2'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
