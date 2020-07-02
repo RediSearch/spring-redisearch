@@ -1,11 +1,10 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.0.RELEASE'
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
     id 'java-library'
     id 'maven-publish'
     id 'com.github.ben-manes.versions' version '0.28.0'
-    id 'com.github.breadmoirai.github-release' version '2.2.12'
     id 'com.jfrog.bintray' version '1.8.5'
     id 'net.researchgate.release' version '2.8.1'
 }
@@ -13,7 +12,6 @@ plugins {
 group = 'com.redislabs'
 description = 'Spring RediSearch'
 sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
 
 repositories {
 	jcenter()
@@ -32,7 +30,7 @@ jar {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
-	api 'com.redislabs:lettusearch:2.3.0'
+	api 'com.redislabs:lettusearch:2.3.1'
 	api 'org.apache.commons:commons-pool2'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -118,18 +116,4 @@ publishing {
     }
 }
 
-task printVersion {
-    doLast {
-        println project.version
-    }
-}
-
-githubRelease {
-    token = project.hasProperty('githubToken') ? project.property('githubToken') : ''
-    owner "RediSearch"
-    repo "spring-redisearch"
-    body changelog()
-}
-
-afterReleaseBuild.dependsOn ":githubRelease"
 afterReleaseBuild.dependsOn bintrayUpload
