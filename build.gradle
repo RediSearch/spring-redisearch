@@ -13,6 +13,12 @@ plugins {
 group = 'com.redislabs'
 description = 'Spring RediSearch'
 sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
 repositories {
 	jcenter()
@@ -34,6 +40,60 @@ test {
     useJUnitPlatform()
 }
 
+distributions {
+    main {
+        contents {
+            from (project.docsDir) {
+                into 'docs'
+            }
+            from 'README.md'
+            from 'LICENSE'
+        }
+    }
+}
+
+distTar {
+    compression = Compression.GZIP
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'Spring RediSearch'
+                description = 'Spring configuration for LettuSearch'
+                url = 'https://github.com/RediSearch/spring-redisearch'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'jruaux'
+                        name = 'Julien Ruaux'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/RediSearch/spring-redisearch.git'
+                    developerConnection = 'scm:git:git@github.com:RediSearch/spring-redisearch.git'
+                    url = 'https://github.com/RediSearch/spring-redisearch'
+                }
+            }
+        }
+    }
+}
+
 bintray {
     user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : ''
     key = project.hasProperty('bintrayKey') ? project.property('bintrayKey') : ''
@@ -41,7 +101,7 @@ bintray {
     publish = true
     pkg {
         repo = 'maven'
-        name = 'spring-redisearch'
+        name = project.name
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/RediSearch/spring-redisearch.git'
 	    version {
@@ -54,59 +114,6 @@ bintray {
 	            password = project.hasProperty('ossrhPassword') ? project.property('ossrhPassword') : ''
 	        }
 	    }
-    }
-}
-
-task sourcesJar(type: Jar) {
-    archiveClassifier = 'sources'
-    from sourceSets.main.allJava
-}
-
-task javadocJar(type: Jar) {
-    archiveClassifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives sourcesJar, javadocJar
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifact sourcesJar
-            artifact javadocJar
-            groupId 'com.redislabs'
-            artifactId 'spring-redisearch'
-
-            pom {
-                name = 'Spring RediSearch'
-                packaging = 'jar'
-                description = 'Spring-enabled client for RediSearch based on LettuSearch'
-                url = 'https://github.com/RediSearch/spring-redisearch'
-
-		        scm {
-		          connection = 'scm:git:git://github.com/RediSearch/spring-redisearch.git'
-		          developerConnection = 'scm:git:git@github.com:RediSearch/spring-redisearch.git'
-		          url = 'https://github.com/RediSearch/spring-redisearch'
-		        }
-
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id = 'jruaux'
-                        name = 'Julien Ruaux'
-                    }
-                }
-            }
-        }
     }
 }
 
