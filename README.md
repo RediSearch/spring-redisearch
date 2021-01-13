@@ -17,7 +17,7 @@ Add Spring RediSearch to your application dependencies, e.g. with Maven:
 <dependency>
     <groupId>com.redislabs</groupId>
     <artifactId>spring-redisearch</artifactId>
-    <version>1.1.1</version>
+    <version>2.5.0</version>
 </dependency>
 ```
 
