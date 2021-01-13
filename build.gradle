@@ -136,5 +136,5 @@ bintray {
     }
 }
 
-afterReleaseBuild.dependsOn ":githubRelease"
-//afterReleaseBuild.dependsOn bintrayUpload
+bintrayUpload.dependsOn ":githubRelease"
+afterReleaseBuild.dependsOn bintrayUpload
