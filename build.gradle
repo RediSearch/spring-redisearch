@@ -104,6 +104,15 @@ publishing {
     }
 }
 
+githubRelease {
+    token = project.hasProperty('githubToken') ? project.property('githubToken') : ''
+    owner "RediSearch"
+    repo "spring-redisearch"
+    releaseAssets distZip, distTar
+    draft true
+    body changelog()
+}
+
 bintray {
     user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : ''
     key = project.hasProperty('bintrayKey') ? project.property('bintrayKey') : ''
@@ -114,26 +123,17 @@ bintray {
         name = project.name
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/RediSearch/spring-redisearch.git'
-	    version {
-	        gpg {
-	            sign = true
-	        }
-	        mavenCentralSync {
-	            sync = true
-	            user = project.hasProperty('ossrhUsername') ? project.property('ossrhUsername') : ''
-	            password = project.hasProperty('ossrhPassword') ? project.property('ossrhPassword') : ''
-	        }
-	    }
+        version {
+            gpg {
+                sign = true
+            }
+            mavenCentralSync {
+                sync = true
+                user = project.hasProperty('ossrhUsername') ? project.property('ossrhUsername') : ''
+                password = project.hasProperty('ossrhPassword') ? project.property('ossrhPassword') : ''
+            }
+        }
     }
-}
-
-githubRelease {
-    token = project.hasProperty('githubToken') ? project.property('githubToken') : ''
-    owner "RediSearch"
-    repo "spring-redisearch"
-    releaseAssets distZip, distTar
-    draft true
-    body changelog()
 }
 
 afterReleaseBuild.dependsOn ":githubRelease"
