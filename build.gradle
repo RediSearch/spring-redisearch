@@ -6,10 +6,10 @@ plugins {
     id 'java-library'
     id 'java-library-distribution'
     id 'maven-publish'
-    id 'com.jfrog.bintray' version '1.8.5'
     id 'net.researchgate.release' version '2.8.1'
     id 'com.github.ben-manes.versions' version '0.36.0'
-    id 'com.github.breadmoirai.github-release' version '2.2.12'    
+    id 'com.github.breadmoirai.github-release' version '2.2.12'
+    id 'com.jfrog.bintray' version '1.8.5'
 }
 
 group = 'com.redislabs'
@@ -136,5 +136,5 @@ githubRelease {
     body changelog()
 }
 
-afterReleaseBuild.dependsOn bintrayUpload
 afterReleaseBuild.dependsOn ":githubRelease"
+afterReleaseBuild.dependsOn bintrayUpload
