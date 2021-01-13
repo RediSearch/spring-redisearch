@@ -29,7 +29,7 @@ public class Example {
 	StatefulRediSearchConnection<String, String> connection;
 
 	public void testSearch() {
-		connection.sync().search("myIndex", "Lalo Schifrin", SearchOptions.builder().build());
+		connection.sync().search("music", "Lalo Schifrin");
 	}
 
 }
