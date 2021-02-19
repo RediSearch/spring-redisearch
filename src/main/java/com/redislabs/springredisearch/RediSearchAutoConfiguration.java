@@ -27,13 +27,14 @@ public class RediSearchAutoConfiguration {
         RedisURI redisURI = null;
 
         if (sentinel != null) {
-            //Since nodes may contain a port, delete it just in case.
             String firstNode = sentinel.getNodes().get(0).replaceAll(":.*", "");
-            RedisURI.Builder builder = RedisURI.Builder.sentinel(firstNode, properties.getPort(), sentinel.getMaster());
+            int port = Integer.parseInt(sentinel.getNodes().get(0).replaceAll(".*:", ""));
+            RedisURI.Builder builder = RedisURI.Builder.sentinel(firstNode, port, sentinel.getMaster());
 
             for (int i = 1; i < sentinel.getNodes().size(); i++) {
                 String node = sentinel.getNodes().get(i).replaceAll(":.*", "");
-                builder = builder.withSentinel(node);
+                port = Integer.parseInt(sentinel.getNodes().get(i).replaceAll(".*:", ""));
+                builder = builder.withSentinel(node, port);
             }
 
             redisURI = builder.build();
