@@ -5,7 +5,7 @@
 [![GitHub issues](https://img.shields.io/github/release/RediSearch/spring-redisearch.svg)](https://github.com/RediSearch/spring-redisearch/releases/latest)
 
 
-# Spring RediSearch
+# Spring RediSearch with Sentinel
 [![Forum](https://img.shields.io/badge/Forum-RediSearch-blue)](https://forum.redislabs.com/c/modules/redisearch/)
 [![Discord](https://img.shields.io/discord/697882427875393627?style=flat-square)](https://discord.gg/xTbqgTB)
 
