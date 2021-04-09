@@ -1,0 +1,39 @@
+= Spring RediSearch
+
+ifdef::badges[]
+image:https://img.shields.io/github/license/RediSearch/spring-redisearch.svg["License", link="https://github.com/RediSearch/spring-redisearch"]
+image:https://img.shields.io/github/release/RediSearch/spring-redisearch.svg["Latest", link="https://github.com/RediSearch/spring-redisearch/releases/latest"]
+endif::[]
+
+image:https://img.shields.io/badge/Forum-RediSearch-blue["Forums", link="https://forum.redislabs.com/c/modules/redisearch/"]
+image:https://img.shields.io/discord/697882427875393627?style=flat-square["Discord", link="https://discord.gg/xTbqgTB"]
+
+Spring RediSearch provides access to RediSearch from Spring applications
+
+== Usage
+
+Add Spring RediSearch to your application dependencies, e.g. with Maven:
+
+```
+<dependency>
+    <groupId>com.redislabs</groupId>
+    <artifactId>spring-redisearch</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+
+Inject and use RediSearchClient or StatefulRediSearchConnection:
+
+[source,java]
+----
+public class Example {
+
+    @Autowired
+    StatefulRediSearchConnection<String, String> connection;
+
+    public void testSearch() {
+        connection.sync().search("music", "Lalo Schifrin");
+    }
+
+}
+----
