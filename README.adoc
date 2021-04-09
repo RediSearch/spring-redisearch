@@ -1,5 +1,6 @@
 = Spring RediSearch
 
+// Badges
 ifdef::badges[]
 image:https://img.shields.io/github/license/RediSearch/spring-redisearch.svg["License", link="https://github.com/RediSearch/spring-redisearch"]
 image:https://img.shields.io/github/release/RediSearch/spring-redisearch.svg["Latest", link="https://github.com/RediSearch/spring-redisearch/releases/latest"]
