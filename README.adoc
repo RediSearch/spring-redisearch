@@ -14,10 +14,9 @@ endif::[]
 ifdef::badges[]
 image:https://img.shields.io/github/license/RediSearch/spring-redisearch.svg["License", link="https://github.com/RediSearch/spring-redisearch"]
 image:https://img.shields.io/github/release/RediSearch/spring-redisearch.svg["Latest", link="https://github.com/RediSearch/spring-redisearch/releases/latest"]
-endif::[]
-
 image:https://img.shields.io/badge/Forum-RediSearch-blue["Forums", link="https://forum.redislabs.com/c/modules/redisearch/"]
 image:https://img.shields.io/discord/697882427875393627?style=flat-square["Discord", link="https://discord.gg/xTbqgTB"]
+endif::[]
 
 Spring RediSearch provides access to RediSearch from Spring applications
 
