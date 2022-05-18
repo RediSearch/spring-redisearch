@@ -18,6 +18,8 @@ image:https://img.shields.io/badge/Forum-RediSearch-blue["Forums", link="https:/
 image:https://img.shields.io/discord/697882427875393627?style=flat-square["Discord", link="https://discord.gg/xTbqgTB"]
 endif::[]
 
+WARNING: Spring RediSearch has been merged into multi-module client https://github.com/redis-developer/lettucemod[LettuceMod]. Updates will now happen in LettuceMod.
+
 Spring RediSearch provides access to RediSearch from Spring applications
 
 == Usage
